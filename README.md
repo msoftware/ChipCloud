@@ -14,7 +14,7 @@ Add to your Android layout xml:
 
 Then add your items:
 ```java
-ChipCloud chipCloud = new ChipCloud(context);
+ChipCloud chipCloud = (ChipCloud) findViewById(R.id.chip_cloud);
 
 chipCloud.setup(Color.parseColor("#ff00cc"), new eu.fiskur.chipcloud.ChipListener() {
     @Override
