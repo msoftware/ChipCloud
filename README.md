@@ -27,7 +27,11 @@ chipCloud.addObject("foo", fooObject);
 chipCloud.addObject("bar!", barObject);
 ```
 
+Which produces:  
 ![Chip Cloud](images/foo_bar.png)
+
+Real-world example for shoe sizes:  
+![Shoe Sizes](images/wrapping_example.png)
 
 ##Dependency
 
