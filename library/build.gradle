@@ -5,7 +5,6 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "eu.fiskur.chipcloud"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
