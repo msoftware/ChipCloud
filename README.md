@@ -23,8 +23,8 @@ chipCloud.setup(Color.parseColor("#ff00cc"), new eu.fiskur.chipcloud.ChipListene
     }
 });
 
-chipCloud.addObject("foo", fooObject);
-chipCloud.addObject("bar!", barObject);
+chipCloud.addObject("Foo", fooObject);
+chipCloud.addObject("Bar", barObject);
 ```
 
 Which produces:  
