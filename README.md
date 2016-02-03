@@ -27,7 +27,7 @@ chipCloud.addObject("foo", fooObject);
 chipCloud.addObject("bar!", barObject);
 ```
 
-#Dependency
+##Dependency
 
 Add jitpack.io to your root build.gradle, eg:
 
@@ -45,16 +45,16 @@ then add the dependency to your project build.gradle:
 ```groovy
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.fiskurgit:FloodMonitoring:1.5'
+    compile 'com.github.fiskurgit:ChipCloud:1.0'
 }
 ```
-You can find the latest version in the releases tab above: https://github.com/fiskurgit/FloodMonitoring/releases
+You can find the latest version in the releases tab above: https://github.com/fiskurgit/ChipCloud/releases
 
-More options at jitpack.io: https://jitpack.io/#fiskurgit/FloodMonitoring
+More options at jitpack.io: https://jitpack.io/#fiskurgit/ChipCloud
 
 #Licence
 
-Full licence here: https://github.com/fiskurgit/FloodMonitoring/blob/master/LICENSE.md
+Full licence here: https://github.com/fiskurgit/ChipCloud/blob/master/LICENSE.md
 
 In short:
 
