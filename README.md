@@ -27,6 +27,8 @@ chipCloud.addObject("foo", fooObject);
 chipCloud.addObject("bar!", barObject);
 ```
 
+![Chip Cloud](images/foo_bar.png)
+
 ##Dependency
 
 Add jitpack.io to your root build.gradle, eg:
@@ -45,7 +47,7 @@ then add the dependency to your project build.gradle:
 ```groovy
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.fiskurgit:ChipCloud:1.1'
+    compile 'com.github.fiskurgit:ChipCloud:1.4'
 }
 ```
 You can find the latest version in the releases tab above: https://github.com/fiskurgit/ChipCloud/releases
@@ -61,5 +63,4 @@ In short:
 > The MIT License is a permissive license that is short and to the point. It lets people do anything they want with your code as long as they provide attribution back to you and don’t hold you liable.
 
 ##Screenshots
-![Trainer Sizes](trainer_sizes.png)
-![Chip Cloud](screenshot.png)
+![Trainer Sizes](images/trainer_sizes.png)
