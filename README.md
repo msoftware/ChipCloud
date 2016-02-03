@@ -1,6 +1,6 @@
 # ChipCloud
 
-ChipCloud is a UI element (very) quickly created as part of a larger hackathon project, it creates a wrapping cloud of Material Design '[Chips](https://www.google.com/design/spec/components/chips.html)' (see screenshot below). This project is not actively maintained.
+ChipCloud is a UI element (very) quickly created as part of a larger hackathon project, it creates a wrapping cloud of single choice '[Chips](https://www.google.com/design/spec/components/chips.html)' (see screenshot below). This project is not actively maintained.
 
 ## Usage
 
