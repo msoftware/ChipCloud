@@ -26,7 +26,7 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         this.context = context;
     }
 
-    private void setup(int selectedColor, ChipListener chipListener){
+    public void setup(int selectedColor, ChipListener chipListener){
         setup(selectedColor);
         setChipListener(chipListener);
     }
@@ -41,7 +41,7 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         this.chipListener = chipListener;
     }
 
-    private void addObject(String label, Object object){
+    public void addObject(String label, Object object){
         objects.add(object);
 
         Chip chip = (Chip) LayoutInflater.from(context).inflate(R.layout.chip, null);
