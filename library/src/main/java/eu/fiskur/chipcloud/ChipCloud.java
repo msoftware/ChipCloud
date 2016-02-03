@@ -45,7 +45,7 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         objects.add(object);
 
         Chip chip = (Chip) LayoutInflater.from(context).inflate(R.layout.chip, null);
-        chip.initChip(context, objects.size(), label, selectedColor);
+        chip.initChip(context, objects.size()-1, label, selectedColor);
         chip.setHeight(chipHeight);
         chip.setChipListener(this);
         addView(chip);
