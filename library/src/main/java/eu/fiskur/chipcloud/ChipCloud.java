@@ -11,30 +11,44 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
 
     private Context context;
     private int chipHeight;
-    private int selectedColor;
+    private int selectedColor = -1;
+    private int selectedFontColor = -1;
+    private int unselectedColor = -1;
+    private int unselectedFontColor = -1;
+
     private List<Object> objects = new ArrayList<>();
     private ChipListener chipListener;
-
 
     public ChipCloud(Context context) {
         super(context);
         this.context = context;
+        init();
     }
 
     public ChipCloud(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        init();
     }
 
-    public void setup(int selectedColor, ChipListener chipListener){
-        setup(selectedColor);
-        setChipListener(chipListener);
+    private void init(){
+        chipHeight = (int) (28 * getResources().getDisplayMetrics().density + 0.5f);
     }
 
-    private void setup(int selectedColor){
-        final float scale = getResources().getDisplayMetrics().density;
-        chipHeight = (int) (28 * scale + 0.5f);
+    private void setSelectedColor(int selectedColor){
         this.selectedColor = selectedColor;
+    }
+
+    private void setSelectedFontColor(int selectedFontColor){
+        this.selectedFontColor = selectedFontColor;
+    }
+
+    private void setUnselectedColor(int unselectedColor){
+        this.unselectedColor = unselectedColor;
+    }
+
+    private void setUnselectedFontColor(int unselectedFontColor){
+        this.unselectedFontColor = unselectedFontColor;
     }
 
     public void setChipListener(ChipListener chipListener){
@@ -44,10 +58,17 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
     public void addObject(String label, Object object){
         objects.add(object);
 
-        Chip chip = (Chip) LayoutInflater.from(context).inflate(R.layout.chip, null);
-        chip.initChip(context, objects.size()-1, label, selectedColor);
-        chip.setHeight(chipHeight);
-        chip.setChipListener(this);
+        Chip chip = new Chip.ChipBuilder()
+                .index(objects.size()-1)
+                .label(label)
+                .selectedColor(selectedColor)
+                .selectedFontColor(selectedFontColor)
+                .unselectedColor(unselectedColor)
+                .unselectedFontColor(unselectedFontColor)
+                .chipHeight(chipHeight)
+                .chipListener(this)
+                .build(context);
+
         addView(chip);
     }
 
@@ -63,6 +84,53 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
 
         if(chipListener != null){
             chipListener.chipSelected(objects.get(index));
+        }
+    }
+
+    public static class ChipCloudBuilder{
+        ChipCloud chipCloud;
+        int selectedColor = -1;
+        int selectedFontColor = -1;
+        int unselectedColor = -1;
+        int unselectedFontColor = -1;
+        ChipListener chipListener;
+
+        public ChipCloudBuilder chipCloud(ChipCloud chipCloud) {
+            this.chipCloud = chipCloud;
+            return this;
+        }
+
+        public ChipCloudBuilder selectedColor(int selectedColor) {
+            this.selectedColor = selectedColor;
+            return this;
+        }
+
+        public ChipCloudBuilder selectedFontColor(int selectedFontColor) {
+            this.selectedFontColor = selectedFontColor;
+            return this;
+        }
+
+        public ChipCloudBuilder unselectedColor(int unselectedColor) {
+            this.unselectedColor = unselectedColor;
+            return this;
+        }
+
+        public ChipCloudBuilder unselectedFontColor(int unselectedFontColor) {
+            this.unselectedFontColor = unselectedFontColor;
+            return this;
+        }
+
+        public ChipCloudBuilder chipListener(ChipListener chipListener) {
+            this.chipListener = chipListener;
+            return this;
+        }
+
+        public void build(){
+            chipCloud.setSelectedColor(selectedColor);
+            chipCloud.setSelectedFontColor(selectedFontColor);
+            chipCloud.setUnselectedColor(unselectedColor);
+            chipCloud.setUnselectedFontColor(unselectedFontColor);
+            chipCloud.setChipListener(chipListener);
         }
     }
 }

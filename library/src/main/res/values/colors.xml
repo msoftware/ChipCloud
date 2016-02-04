@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="chip">#333</color>
-    <color name="dark_grey">#333</color>
+    <color name="dark_grey">#333333</color>
+    <color name="light_grey">#bbbbbb</color>
     <color name="white">#ffffff</color>
 </resources>

@@ -7,6 +7,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,8 +17,12 @@ public class Chip extends TextView implements View.OnClickListener{
     private int index = -1;
     private boolean selected = false;
     private ChipListener listener = null;
-    private int sizeSelectedColor = -1;
-
+    private int selectedColor = -1;
+    private int selectedFontColor = -1;
+    private int unselectedColor = -1;
+    private int unselectedFontColor = -1;
+    private Drawable selectedDrawable;
+    private Drawable unselectedDrawable;
 
     public void setChipListener(ChipListener listener){
         this.listener = listener;
@@ -38,11 +43,43 @@ public class Chip extends TextView implements View.OnClickListener{
         init();
     }
 
-    public void initChip(Context context, int index, String label, int sizeSelectedColor){
+    public void initChip(Context context,
+                         int index,
+                         String label,
+                         int selectedColor,
+                         int selectedFontColor,
+                         int unselectedColor,
+                         int unselectedFontColor){
+
         this.context = context;
         this.index = index;
-        this.sizeSelectedColor = sizeSelectedColor;
+        this.selectedColor = selectedColor;
+        this.selectedFontColor = selectedFontColor;
+        this.unselectedColor = unselectedColor;
+        this.unselectedFontColor = unselectedFontColor;
+
+        selectedDrawable = ContextCompat.getDrawable(context, R.drawable.chip_selected);
+        if(selectedColor == -1){
+            selectedColor = ContextCompat.getColor(context, R.color.dark_grey);
+        }
+        selectedDrawable.setColorFilter(new PorterDuffColorFilter(selectedColor, PorterDuff.Mode.MULTIPLY));
+
+        if(selectedFontColor == -1){
+            selectedFontColor = ContextCompat.getColor(context, R.color.white);
+        }
+
+        unselectedDrawable = ContextCompat.getDrawable(context, R.drawable.chip_selected);
+        if(unselectedColor == -1){
+            unselectedColor = ContextCompat.getColor(context, R.color.light_grey);
+        }
+        unselectedDrawable.setColorFilter(new PorterDuffColorFilter(unselectedColor, PorterDuff.Mode.MULTIPLY));
+
+        if(unselectedFontColor == -1){
+            unselectedFontColor = ContextCompat.getColor(context, R.color.chip);
+        }
+
         setText(label);
+        unselect();
     }
 
     private void init(){
@@ -54,25 +91,23 @@ public class Chip extends TextView implements View.OnClickListener{
     public void onClick(View v) {
         if(selected){
             //set as unselected
-            setBackgroundResource(R.drawable.chip);
-            setTextColor(ContextCompat.getColor(context, R.color.chip));
+            unselect();
         }else{
             //set as selected
-            Drawable selected = ContextCompat.getDrawable(context, R.drawable.chip_selected);
-            if(sizeSelectedColor == -1){
-                sizeSelectedColor = ContextCompat.getColor(context, R.color.dark_grey);
-            }
-            selected.setColorFilter(new PorterDuffColorFilter(sizeSelectedColor, PorterDuff.Mode.MULTIPLY));
+            setBackgroundCompat(selectedDrawable);
 
-            setBackgroundCompat(selected);
-
-            setTextColor(ContextCompat.getColor(context, R.color.white));
+            setTextColor(selectedFontColor);
             if(listener != null){
                 listener.chipSelected(index);
             }
         }
 
         selected = !selected;
+    }
+
+    private void unselect(){
+        setBackgroundCompat(unselectedDrawable);
+        setTextColor(unselectedFontColor);
     }
 
     @SuppressWarnings("deprecation")
@@ -85,13 +120,73 @@ public class Chip extends TextView implements View.OnClickListener{
     }
 
     public void deselect(){
-        setBackgroundResource(R.drawable.chip);
-        setTextColor(ContextCompat.getColor(context, R.color.chip));
+        unselect();
         selected = false;
     }
 
     public interface ChipListener{
         void chipSelected(int index);
+    }
+
+
+    public static class ChipBuilder{
+        int index;
+        String label;
+        int selectedColor;
+        int selectedFontColor;
+        int unselectedColor;
+        int unselectedFontColor;
+        int chipHeight;
+        ChipListener chipListener;
+
+        public ChipBuilder index(int index){
+            this.index = index;
+            return this;
+        }
+
+        public ChipBuilder selectedColor(int selectedColor){
+            this.selectedColor = selectedColor;
+            return this;
+        }
+
+        public ChipBuilder selectedFontColor(int selectedFontColor){
+            this.selectedFontColor = selectedFontColor;
+            return this;
+        }
+
+        public ChipBuilder unselectedColor(int unselectedColor){
+            this.unselectedColor = unselectedColor;
+            return this;
+        }
+
+        public ChipBuilder unselectedFontColor(int unselectedFontColor){
+            this.unselectedFontColor = unselectedFontColor;
+            return this;
+        }
+
+        public ChipBuilder label(String label){
+            this.label = label;
+            return this;
+        }
+
+        public ChipBuilder chipHeight(int chipHeight){
+            this.chipHeight = chipHeight;
+            return this;
+        }
+
+        public ChipBuilder chipListener(ChipListener chipListener){
+            this.chipListener = chipListener;
+            return this;
+        }
+
+        public Chip build(Context context){
+            Chip chip = (Chip) LayoutInflater.from(context).inflate(R.layout.chip, null);
+            chip.initChip(context, index, label, selectedColor, selectedFontColor, unselectedColor, unselectedFontColor);
+            chip.setChipListener(chipListener);
+            chip.setHeight(chipHeight);
+            return chip;
+        }
+
     }
 }
 
