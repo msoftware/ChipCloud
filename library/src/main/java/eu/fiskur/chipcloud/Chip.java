@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -23,6 +24,9 @@ public class Chip extends TextView implements View.OnClickListener{
     private int unselectedFontColor = -1;
     private Drawable selectedDrawable;
     private Drawable unselectedDrawable;
+    private TransitionDrawable crossfader;
+    private int transitionTime = 750;
+    private int reverseTransitionTime = 500;
 
     public void setChipListener(ChipListener listener){
         this.listener = listener;
@@ -78,6 +82,13 @@ public class Chip extends TextView implements View.OnClickListener{
             unselectedFontColor = ContextCompat.getColor(context, R.color.chip);
         }
 
+        Drawable backgrounds[] = new Drawable[2];
+        backgrounds[0] = unselectedDrawable;
+        backgrounds[1] = selectedDrawable;
+
+        crossfader = new TransitionDrawable(backgrounds);
+        setBackgroundCompat(crossfader);
+
         setText(label);
         unselect();
     }
@@ -94,7 +105,7 @@ public class Chip extends TextView implements View.OnClickListener{
             unselect();
         }else{
             //set as selected
-            setBackgroundCompat(selectedDrawable);
+            crossfader.startTransition(transitionTime);
 
             setTextColor(selectedFontColor);
             if(listener != null){
@@ -106,7 +117,12 @@ public class Chip extends TextView implements View.OnClickListener{
     }
 
     private void unselect(){
-        setBackgroundCompat(unselectedDrawable);
+        if(selected){
+            crossfader.reverseTransition(reverseTransitionTime);
+        }else{
+            crossfader.resetTransition();
+        }
+
         setTextColor(unselectedFontColor);
     }
 
@@ -186,7 +202,6 @@ public class Chip extends TextView implements View.OnClickListener{
             chip.setHeight(chipHeight);
             return chip;
         }
-
     }
 }
 
