@@ -26,8 +26,8 @@ new ChipCloud.ChipCloudBuilder()
         .chipListener(new ChipListener() {
             @Override
             public void chipSelected(Object object) {
-                selectedOption = (Option) object;
-                Flog.d("User chose size: " + selectedOption.getName());
+                SomeObj selectedObj = (SomeObj) object;
+                //...
             }
         })
         .build();
