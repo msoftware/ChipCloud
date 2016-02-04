@@ -23,6 +23,8 @@ new ChipCloud.ChipCloudBuilder()
         .selectedFontColor(Color.parseColor("#ffffff"))
         .unselectedColor(Color.parseColor("#e1e1e1"))
         .unselectedFontColor(Color.parseColor("#333333"))
+        .selectTransitionMS(500)
+        .deselectTransitionMS(250)
         .chipListener(new ChipListener() {
             @Override
             public void chipSelected(Object object) {
