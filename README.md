@@ -17,12 +17,20 @@ Then add your items:
 ```java
 ChipCloud chipCloud = (ChipCloud) findViewById(R.id.chip_cloud);
 
-chipCloud.setup(Color.parseColor("#ff00cc"), new eu.fiskur.chipcloud.ChipListener() {
-    @Override
-    public void chipSelected(Object object) {
-        //...
-    }
-});
+new ChipCloud.ChipCloudBuilder()
+        .chipCloud(chipCloud)
+        .selectedColor(Color.parseColor("#ff00cc"))
+        .selectedFontColor(Color.parseColor("#ffffff"))
+        .unselectedColor(Color.parseColor("#e1e1e1"))
+        .unselectedFontColor(Color.parseColor("#333333"))
+        .chipListener(new ChipListener() {
+            @Override
+            public void chipSelected(Object object) {
+                selectedOption = (Option) object;
+                Flog.d("User chose size: " + selectedOption.getName());
+            }
+        })
+        .build();
 
 chipCloud.addObject("Foo", fooObject);
 chipCloud.addObject("Bar", barObject);
