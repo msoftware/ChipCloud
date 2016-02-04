@@ -1,7 +1,7 @@
 # ChipCloud
 [![Build Status](https://travis-ci.org/fiskurgit/ChipCloud.svg?branch=master)](https://travis-ci.org/fiskurgit/ChipCloud)
 
-ChipCloud is an Android view (very) quickly knocked up for a larger hackathon project, it creates a wrapping cloud of single choice '[Chips](https://www.google.com/design/spec/components/chips.html)' (see screenshot below). This project is not actively maintained.
+ChipCloud is an Android view (very) quickly knocked up for a larger hackathon project, it creates a wrapping cloud of single choice '[Chips](https://www.google.com/design/spec/components/chips.html)' (see screenshot below).
 
 ## Usage
 
@@ -13,7 +13,7 @@ Add to your Android layout xml:
     android:layout_height="wrap_content"/>
 ```
 
-Then add your items:
+Then configure and add your items:
 ```java
 ChipCloud chipCloud = (ChipCloud) findViewById(R.id.chip_cloud);
 
@@ -23,6 +23,8 @@ new ChipCloud.ChipCloudBuilder()
         .selectedFontColor(Color.parseColor("#ffffff"))
         .unselectedColor(Color.parseColor("#e1e1e1"))
         .unselectedFontColor(Color.parseColor("#333333"))
+        .selectTransitionMS(500)
+        .deselectTransitionMS(250)
         .chipListener(new ChipListener() {
             @Override
             public void chipSelected(Object object) {
@@ -60,7 +62,7 @@ then add the dependency to your project build.gradle:
 ```groovy
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.fiskurgit:ChipCloud:1.5'
+    compile 'com.github.fiskurgit:ChipCloud:1.7'
 }
 ```
 You can find the latest version in the releases tab above: https://github.com/fiskurgit/ChipCloud/releases
