@@ -25,8 +25,8 @@ public class Chip extends TextView implements View.OnClickListener{
     private Drawable selectedDrawable;
     private Drawable unselectedDrawable;
     private TransitionDrawable crossfader;
-    private int transitionTime = 750;
-    private int reverseTransitionTime = 500;
+    private int selectTransitionMS = 750;
+    private int deselectTransitionMS = 500;
 
     public void setChipListener(ChipListener listener){
         this.listener = listener;
@@ -93,6 +93,14 @@ public class Chip extends TextView implements View.OnClickListener{
         unselect();
     }
 
+    public void setSelectTransitionMS(int selectTransitionMS){
+        this.selectTransitionMS = selectTransitionMS;
+    }
+
+    public void setDeselectTransitionMS(int deselectTransitionMS){
+        this.deselectTransitionMS = deselectTransitionMS;
+    }
+
     private void init(){
         setOnClickListener(this);
     }
@@ -105,7 +113,7 @@ public class Chip extends TextView implements View.OnClickListener{
             unselect();
         }else{
             //set as selected
-            crossfader.startTransition(transitionTime);
+            crossfader.startTransition(selectTransitionMS);
 
             setTextColor(selectedFontColor);
             if(listener != null){
@@ -118,7 +126,7 @@ public class Chip extends TextView implements View.OnClickListener{
 
     private void unselect(){
         if(selected){
-            crossfader.reverseTransition(reverseTransitionTime);
+            crossfader.reverseTransition(deselectTransitionMS);
         }else{
             crossfader.resetTransition();
         }
@@ -153,6 +161,9 @@ public class Chip extends TextView implements View.OnClickListener{
         int unselectedColor;
         int unselectedFontColor;
         int chipHeight;
+        int selectTransitionMS = 750;
+        int deselectTransitionMS = 500;
+
         ChipListener chipListener;
 
         public ChipBuilder index(int index){
@@ -195,9 +206,21 @@ public class Chip extends TextView implements View.OnClickListener{
             return this;
         }
 
+        public ChipBuilder selectTransitionMS(int selectTransitionMS){
+            this.selectTransitionMS = selectTransitionMS;
+            return this;
+        }
+
+        public ChipBuilder deselectTransitionMS(int deselectTransitionMS){
+            this.deselectTransitionMS = deselectTransitionMS;
+            return this;
+        }
+
         public Chip build(Context context){
             Chip chip = (Chip) LayoutInflater.from(context).inflate(R.layout.chip, null);
             chip.initChip(context, index, label, selectedColor, selectedFontColor, unselectedColor, unselectedFontColor);
+            chip.setSelectTransitionMS(selectTransitionMS);
+            chip.setDeselectTransitionMS(deselectTransitionMS);
             chip.setChipListener(chipListener);
             chip.setHeight(chipHeight);
             return chip;

@@ -15,6 +15,8 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
     private int selectedFontColor = -1;
     private int unselectedColor = -1;
     private int unselectedFontColor = -1;
+    private int selectTransitionMS = 750;
+    private int deselectTransitionMS = 500;
 
     private List<Object> objects = new ArrayList<>();
     private ChipListener chipListener;
@@ -51,6 +53,14 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         this.unselectedFontColor = unselectedFontColor;
     }
 
+    private void setSelectTransitionMS(int selectTransitionMS){
+        this.selectTransitionMS = selectTransitionMS;
+    }
+
+    private void setDeselectTransitionMS(int deselectTransitionMS){
+        this.deselectTransitionMS = deselectTransitionMS;
+    }
+
     public void setChipListener(ChipListener chipListener){
         this.chipListener = chipListener;
     }
@@ -65,6 +75,8 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
                 .selectedFontColor(selectedFontColor)
                 .unselectedColor(unselectedColor)
                 .unselectedFontColor(unselectedFontColor)
+                .selectTransitionMS(selectTransitionMS)
+                .deselectTransitionMS(deselectTransitionMS)
                 .chipHeight(chipHeight)
                 .chipListener(this)
                 .build(context);
@@ -91,8 +103,10 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         ChipCloud chipCloud;
         int selectedColor = -1;
         int selectedFontColor = -1;
-        int unselectedColor = -1;
-        int unselectedFontColor = -1;
+        int deselectedColor = -1;
+        int deselectedFontColor = -1;
+        int selectTransitionMS = 750;
+        int deselectTransitionMS = 500;
         ChipListener chipListener;
 
         public ChipCloudBuilder chipCloud(ChipCloud chipCloud) {
@@ -110,13 +124,23 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
             return this;
         }
 
-        public ChipCloudBuilder unselectedColor(int unselectedColor) {
-            this.unselectedColor = unselectedColor;
+        public ChipCloudBuilder deselectedColor(int deselectedColor) {
+            this.deselectedColor = deselectedColor;
             return this;
         }
 
-        public ChipCloudBuilder unselectedFontColor(int unselectedFontColor) {
-            this.unselectedFontColor = unselectedFontColor;
+        public ChipCloudBuilder deselectedFontColor(int deselectedFontColor) {
+            this.deselectedFontColor = deselectedFontColor;
+            return this;
+        }
+
+        public ChipCloudBuilder selectTransitionMS(int selectTransitionMS) {
+            this.selectTransitionMS = selectTransitionMS;
+            return this;
+        }
+
+        public ChipCloudBuilder deselectTransitionMS(int deselectTransitionMS) {
+            this.deselectTransitionMS = deselectTransitionMS;
             return this;
         }
 
@@ -128,8 +152,10 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         public void build(){
             chipCloud.setSelectedColor(selectedColor);
             chipCloud.setSelectedFontColor(selectedFontColor);
-            chipCloud.setUnselectedColor(unselectedColor);
-            chipCloud.setUnselectedFontColor(unselectedFontColor);
+            chipCloud.setUnselectedColor(deselectedColor);
+            chipCloud.setUnselectedFontColor(deselectedFontColor);
+            chipCloud.setSelectTransitionMS(selectTransitionMS);
+            chipCloud.setDeselectTransitionMS(deselectTransitionMS);
             chipCloud.setChipListener(chipListener);
         }
     }
