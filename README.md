@@ -13,7 +13,7 @@ Add to your Android layout xml:
     android:layout_height="wrap_content"/>
 ```
 
-Then add your items:
+Then configure and add your items:
 ```java
 ChipCloud chipCloud = (ChipCloud) findViewById(R.id.chip_cloud);
 
