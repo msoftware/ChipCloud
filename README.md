@@ -44,8 +44,7 @@ new ChipCloud.ChipCloudBuilder()
         .deselectTransitionMS(250)
         .chipListener(new ChipListener() {
             @Override
-            public void chipSelected(Object object) {
-                SomeObj selectedObj = (SomeObj) object;
+            public void chipSelected(int index) {
                 //...
             }
         })
@@ -54,8 +53,8 @@ new ChipCloud.ChipCloudBuilder()
 
 Then add your items:
 ```java
-chipCloud.addObject("Foo", fooObject);
-chipCloud.addObject("Bar", barObject);
+chipCloud.addChip("Foo");
+chipCloud.addChip("Bar");
 ```
 
 Which produces:  
@@ -84,7 +83,7 @@ then add the dependency to your project build.gradle:
 ```groovy
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.fiskurgit:ChipCloud:1.9'
+    compile 'com.github.fiskurgit:ChipCloud:2.0.0'
 }
 ```
 You can find the latest version in the releases tab above: https://github.com/fiskurgit/ChipCloud/releases
