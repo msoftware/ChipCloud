@@ -124,6 +124,15 @@ public class Chip extends TextView implements View.OnClickListener{
         selected = !selected;
     }
 
+    public void select(){
+        crossfader.startTransition(selectTransitionMS);
+
+        setTextColor(selectedFontColor);
+        if(listener != null){
+            listener.chipSelected(index);
+        }
+    }
+
     private void unselect(){
         if(selected){
             crossfader.reverseTransition(deselectTransitionMS);

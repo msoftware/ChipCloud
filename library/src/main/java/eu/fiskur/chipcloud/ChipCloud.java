@@ -99,6 +99,11 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         addView(chip);
     }
 
+    public void setSelectedChip(int index){
+        Chip chip = (Chip) getChildAt(index);
+        chip.select();
+    }
+
     @Override
     public void chipSelected(int index) {
 
