@@ -16,15 +16,16 @@ Add to your Android layout xml:
 Configure in xml:  
 ```xml
 <eu.fiskur.chipcloud.ChipCloud
+    xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
     android:id="@+id/chip_cloud"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    custom:deselectedColor="@color/deselected_color"
-    custom:deselectedFontColor="@color/deselected_font_color"
-    custom:selectedColor="@color/selected_color"
-    custom:selectedFontColor="@color/selected_font_color"
-    custom:deselectTransitionMS="500"
-    custom:selectTransitionMS="750"/>
+    chipcloud:deselectedColor="@color/deselected_color"
+    chipcloud:deselectedFontColor="@color/deselected_font_color"
+    chipcloud:selectedColor="@color/selected_color"
+    chipcloud:selectedFontColor="@color/selected_font_color"
+    chipcloud:deselectTransitionMS="500"
+    chipcloud:selectTransitionMS="750"/>
 ```
 or in code:  
 ```java
@@ -78,7 +79,7 @@ then add the dependency to your project build.gradle:
 ```groovy
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.fiskurgit:ChipCloud:1.7'
+    compile 'com.github.fiskurgit:ChipCloud:1.8'
 }
 ```
 You can find the latest version in the releases tab above: https://github.com/fiskurgit/ChipCloud/releases
