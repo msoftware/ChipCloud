@@ -13,7 +13,20 @@ Add to your Android layout xml:
     android:layout_height="wrap_content"/>
 ```
 
-Then configure and add your items:
+Configure in xml:  
+```xml
+<eu.fiskur.chipcloud.ChipCloud
+    android:id="@+id/chip_cloud"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    custom:deselectedColor="@color/deselected_color"
+    custom:deselectedFontColor="@color/deselected_font_color"
+    custom:selectedColor="@color/selected_color"
+    custom:selectedFontColor="@color/selected_font_color"
+    custom:deselectTransitionMS="500"
+    custom:selectTransitionMS="750"/>
+```
+or in code:  
 ```java
 ChipCloud chipCloud = (ChipCloud) findViewById(R.id.chip_cloud);
 
@@ -33,7 +46,10 @@ new ChipCloud.ChipCloudBuilder()
             }
         })
         .build();
+```
 
+Then add your items:
+```java
 chipCloud.addObject("Foo", fooObject);
 chipCloud.addObject("Bar", barObject);
 ```
