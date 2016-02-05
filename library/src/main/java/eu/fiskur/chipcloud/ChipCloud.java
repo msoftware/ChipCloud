@@ -1,6 +1,7 @@
 package eu.fiskur.chipcloud;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 
@@ -30,6 +31,20 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
     public ChipCloud(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ChipCloud, 0, 0);
+
+        try {
+            selectedColor = a.getColor(R.styleable.ChipCloud_selectedColor, -1);
+            selectedFontColor = a.getColor(R.styleable.ChipCloud_selectedFontColor, -1);
+            unselectedColor = a.getColor(R.styleable.ChipCloud_deselectedColor, -1);
+            unselectedFontColor = a.getColor(R.styleable.ChipCloud_deselectedFontColor, -1);
+            selectTransitionMS = a.getInt(R.styleable.ChipCloud_selectTransitionMS, 750);
+            deselectTransitionMS = a.getInt(R.styleable.ChipCloud_deselectTransitionMS, 500);
+        } finally {
+            a.recycle();
+        }
+
         init();
     }
 
@@ -37,27 +52,27 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         chipHeight = (int) (28 * getResources().getDisplayMetrics().density + 0.5f);
     }
 
-    private void setSelectedColor(int selectedColor){
+    public void setSelectedColor(int selectedColor){
         this.selectedColor = selectedColor;
     }
 
-    private void setSelectedFontColor(int selectedFontColor){
+    public void setSelectedFontColor(int selectedFontColor){
         this.selectedFontColor = selectedFontColor;
     }
 
-    private void setUnselectedColor(int unselectedColor){
+    public void setUnselectedColor(int unselectedColor){
         this.unselectedColor = unselectedColor;
     }
 
-    private void setUnselectedFontColor(int unselectedFontColor){
+    public void setUnselectedFontColor(int unselectedFontColor){
         this.unselectedFontColor = unselectedFontColor;
     }
 
-    private void setSelectTransitionMS(int selectTransitionMS){
+    public void setSelectTransitionMS(int selectTransitionMS){
         this.selectTransitionMS = selectTransitionMS;
     }
 
-    private void setDeselectTransitionMS(int deselectTransitionMS){
+    public void setDeselectTransitionMS(int deselectTransitionMS){
         this.deselectTransitionMS = deselectTransitionMS;
     }
 
