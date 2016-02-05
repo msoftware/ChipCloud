@@ -58,6 +58,8 @@ chipCloud.addObject("Bar", barObject);
 Which produces:  
 ![Chip Cloud](images/foo_bar.png)
 
+Set the selected index using ```chipCloud.setSelectedChip(2)```
+
 Real-world example for shoe sizes:  
 ![Shoe Sizes](images/wrapping_example.png)
 
@@ -79,7 +81,7 @@ then add the dependency to your project build.gradle:
 ```groovy
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.fiskurgit:ChipCloud:1.8'
+    compile 'com.github.fiskurgit:ChipCloud:1.9'
 }
 ```
 You can find the latest version in the releases tab above: https://github.com/fiskurgit/ChipCloud/releases
