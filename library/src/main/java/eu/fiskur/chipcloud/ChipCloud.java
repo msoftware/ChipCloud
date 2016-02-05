@@ -19,7 +19,6 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
     private int selectTransitionMS = 750;
     private int deselectTransitionMS = 500;
 
-    private List<Object> objects = new ArrayList<>();
     private ChipListener chipListener;
 
     public ChipCloud(Context context) {
@@ -80,11 +79,9 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         this.chipListener = chipListener;
     }
 
-    public void addObject(String label, Object object){
-        objects.add(object);
-
+    public void addChip(String label){
         Chip chip = new Chip.ChipBuilder()
-                .index(objects.size()-1)
+                .index(getChildCount())
                 .label(label)
                 .selectedColor(selectedColor)
                 .selectedFontColor(selectedFontColor)
@@ -106,8 +103,7 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
 
     @Override
     public void chipSelected(int index) {
-
-        for(int i = 0 ; i < objects.size() ; i++){
+        for(int i = 0 ; i < getChildCount() ; i++){
             Chip chip = (Chip) getChildAt(i);
             if(i != index){
                 chip.deselect();
@@ -115,7 +111,7 @@ public class ChipCloud extends FlowLayout implements Chip.ChipListener {
         }
 
         if(chipListener != null){
-            chipListener.chipSelected(objects.get(index));
+            chipListener.chipSelected(index);
         }
     }
 
